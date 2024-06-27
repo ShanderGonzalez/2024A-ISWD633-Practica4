@@ -10,6 +10,7 @@ Asignar núcleos de CPU específicos:
 ```
 
 **¿Como saber el numero de procesadores virtuales que tiene una máquina?**
+
 Para saber el numero de procesadores virtuales en docker se usa el siguiente comando, pero para ello el contenedor debe estar en ejecucion
 ```
 docker exec -it <nombre del contenedor> nproc
