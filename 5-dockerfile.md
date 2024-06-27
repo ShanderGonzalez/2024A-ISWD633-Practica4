@@ -52,7 +52,7 @@ docker build -t <nombre imagen>:<version> .
  
 ### Ejecutar el archivo Dockerfile y construir una imagen en la versión 1.0
 
-_Puedes copiar y ejecutar directamente. No olvides verificar en qué directorio se encuentra el archivo Dockerfile
+*Puedes copiar y ejecutar directamente. No olvides verificar en qué directorio se encuentra el archivo Dockerfile*
 ```
 docker build -t dockerfile:1.0 .
 ```
