@@ -98,7 +98,10 @@ Se han ejecutado 10 pasos:
 ![image](https://github.com/ShanderGonzalez/2024A-ISWD633-Practica4/assets/94009521/4265a18f-4ccb-4020-8420-5f092f49f294)
 
 **Modificar el archivo index.html para incluir su nombre**
+![image](https://github.com/ShanderGonzalez/2024A-ISWD633-Practica4/assets/94009521/cfa92d6b-f6c8-4e60-b410-710731d1f428)
+
 **¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen?**
+
 Se han ejecutado 10 pasos:
 
 1. Cargar la definición de construcción desde Dockerfile
