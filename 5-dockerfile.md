@@ -51,19 +51,68 @@ docker build -t <nombre imagen>:<version> .
 
  
 ### Ejecutar el archivo Dockerfile y construir una imagen en la versión 1.0
+
 _Puedes copiar y ejecutar directamente. No olvides verificar en qué directorio se encuentra el archivo Dockerfile
 ```
-
+docker build -t dockerfile:1.0 .
 ```
+![image](https://github.com/ShanderGonzalez/2024A-ISWD633-Practica4/assets/94009521/52cac541-b360-4f23-a4d7-a9dacf3f4fde)
+
 
 **¿Cuántos pasos se han ejecutado?**
-# RESPONDER 
+
+Se han ejecutado 10 pasos:
+
+1. Cargar la definición de construcción desde Dockerfile:
+```=> [internal] load build definition from Dockerfile```
+
+2. Cargar metadatos para centos:7:
+```=> [internal] load metadata for docker.io/library/centos:7```
+
+3. Autenticación para library/centos:pull en registry-1.docker.io:
+```=> [auth] library/centos:pull token for registry-1.docker.io```
+
+4. Cargar .dockerignore:
+```=> [internal] load .dockerignore```
+
+5. Cargar el contexto de construcción:
+```=> [internal] load build context```
+
+6. Descargar y extraer la imagen base centos:7:
+```=> [1/4] FROM docker.io/library/centos:7@sha256:be65f488b7764ad3638f236b7b515b3678369a5124c47b8d32916d6487418ea4```
+
+7. Actualizar el sistema operativo:
+```=> [2/4] RUN yum -y update```
+
+8. Instalar Apache HTTP Server:
+```=> [3/4] RUN yum -y install httpd```
+
+9. Copiar el contenido del directorio ./web al contenedor:
+```=> [4/4] COPY ./web /var/www/html```
+
+10. Exportar la imagen resultante:
+```=> exporting to image```
+
 
 ### Inspeccionar la imagen creada
-# COMPLETAR CON UNA CAPTURA
+![image](https://github.com/ShanderGonzalez/2024A-ISWD633-Practica4/assets/94009521/4265a18f-4ccb-4020-8420-5f092f49f294)
 
 **Modificar el archivo index.html para incluir su nombre**
-**¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen**
+**¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen?**
+Se han ejecutado 10 pasos:
+
+1. Cargar la definición de construcción desde Dockerfile
+2. Cargar metadatos para centos:7
+3. Autenticación para library/centos:pull en registry-1.docker.io
+4. Cargar .dockerignore
+5. Cargar el contexto de construcción
+6. Descargar y extraer la imagen base centos:7
+7. Actualizar el sistema operativo
+8. Instalar Apache HTTP Server
+9. Copiar el contenido del directorio ./web al contenedor
+10. Exportar la imagen resultante
+
+En cuanto a la creacion de la imagen, se tiene que en los pasos 7 y 8 (actualización del sistema operativo e instalación de Apache HTTP Server) se marcaron como CACHED, lo que significa que Docker detectó que no hubo cambios en estos pasos desde la última construcción y reutilizó las capas anteriores. El uso de la cache en Docker ofrece beneficios como una construcción más rápida, mayor eficiencia al reducir el tiempo y los recursos necesarios, y consistencia al asegurar que las capas intermedias no cambien si los pasos de construcción permanecen iguales. En resumen, aunque se utilizaron 10 pasos, la construcción fue significativamente más rápida gracias a la cache.
 
 ## Mecanismo de caché
 Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso de construcción y evitar la repetición de pasos que no han cambiado. Cada instrucción en un Dockerfile crea una capa en la imagen final. Docker intenta reutilizar las capas de una construcción anterior si no han cambiado, lo que reduce significativamente el tiempo de construcción.
@@ -75,14 +124,19 @@ Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso
 
 ### Crear un contenedor a partir de las imagen creada, mapear todos los puertos
 ```
-
+docker run -d -P --name contenedor1 dockerfile:1.0
 ```
 
 ### ¿Con que puerto host se está realizando el mapeo?
-# COMPLETAR CON LA RESPUESTA
+```
+docker port <nombre del contenedor>
+```
+![image](https://github.com/ShanderGonzalez/2024A-ISWD633-Practica4/assets/94009521/b1bd0132-9cf4-47ed-a6ab-7e74b0dd0bfd)
+![image](https://github.com/ShanderGonzalez/2024A-ISWD633-Practica4/assets/94009521/7e3ab5bb-eb58-4451-8c2e-a805a0a4157e)
 
 **¿Qué es una imagen huérfana?**
-# COMPLETAR CON LA RESPUESTA
+
+Una imagen huérfana en Docker es aquella que carece de etiquetas y no está en uso por ningún contenedor ni servicio activo. Estas imágenes pueden acumularse si se eliminan contenedores sin eliminar las imágenes subyacentes, ocupando espacio innecesario en el sistema. Es recomendable identificar y eliminar regularmente estas imágenes usando comandos como docker image prune para mantener un entorno Docker eficiente y organizado.
 
 ### Identificar imágenes huérfanas
 ```
